@@ -4,8 +4,7 @@ import App from './App';
 import {RecoilRoot} from "recoil";
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 import {theme} from "./style/theme";
-import {RouterProvider} from "react-router-dom";
-import router from "./Router";
+import {QueryClient, QueryClientProvider} from "react-query";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -39,7 +38,12 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
-  line-height: 1;
+  line-height: 1.2;
+  font-weight: 300;
+  font-family: "Source Code Pro";
+  color:${(props) => props.theme.white.darker};
+  background-color: black;
+  
 }
 menu, ol, ul {
   list-style: none;
@@ -76,13 +80,18 @@ a {
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const client = new QueryClient();
+
 root.render(
   <React.StrictMode>
       <RecoilRoot>
-          <ThemeProvider theme={theme}>
-              <GlobalStyle />
-              <App />
-          </ThemeProvider>
+          <QueryClientProvider client={client}>
+              <ThemeProvider theme={theme}>
+                  <GlobalStyle />
+                  <App />
+              </ThemeProvider>
+          </QueryClientProvider>
       </RecoilRoot>
   </React.StrictMode>
 );
