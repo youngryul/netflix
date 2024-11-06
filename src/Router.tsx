@@ -33,6 +33,15 @@ const router = createBrowserRouter([
             </>
         ),
     },
+    {
+        path: "movies/:id",
+        element: (
+            <>
+                <Header />
+                <Home />
+            </>
+        ),
+    },
 ])
 
 export default router;
